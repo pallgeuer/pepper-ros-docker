@@ -1,0 +1,14 @@
+<launch>
+	<!-- this is one of our WTM peppers -->
+	<arg name="ip" default="192.168.104.144" />
+	
+	<!-- include the main pepper bringup launchfile and remap ip arg -->
+	<include file="/opt/ros/kinetic/share/pepper_bringup/launch/pepper_full_py.launch">
+		<arg name="nao_ip" value="$(arg ip)" />
+	</include>
+
+	<!-- launch the laser merger -->
+	<include file="/catkin_ws/src/ira_laser_tools/launch/ira_laser_merger_pepper_params.launch">
+	</include>
+
+</launch>
