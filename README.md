@@ -21,10 +21,10 @@ sudo docker run -it --network host minimal-pepper-ros-driver:latest
 ```
 The `--network host` parameter is critical, this tell the container to use the same network namespace as the host machine, which allows us to build a distributed ROS environment. 
 
-You can now launch Pepper's ROS stack by simply calling `roslaunch pepper.launch ip:=<PEPPER_IP>`, replace `<PEPPER_IP>` with the IP address of you robot (or change the default value for the parameter in the script). This will start 
+You can now launch Pepper's ROS stack by simply calling `roslaunch pepper.launch ip:=<PEPPER_IP>`, replace `<PEPPER_IP>` with the IP address of you robot (or change the default value for the parameter in the script). This will start the ros packages for Pepper that make all sorta of data and services available via ROS.
 
 ### A distributed ROS environment
-However, you probably want to do more with Pepper, eg driving it around or looking at sensor data. With our minimal image we provide here, this isn't directly possible because it is running headless, thus RVIZ etc won't work. There are ways around this (nvidia-docker etc), but we suggest a different solution: Simply start a `roscore` on your main machine, from which you are starting the docker image. 
+With our minimal image we provide here, it isn't directly possible to inspect topic data with RVIZ or user other GUI tools in the container, because the container is running headless, thus GUI tools won't work. There are ways around this (nvidia-docker etc), but we suggest a different solution: Simply start a `roscore` on your main machine, from which you are starting the docker image, then use that roscore in the docker container.
 
 Assuming you have a roscore running on your main machine, before calling `pepper.launch`, export that roscore's URL in the container. In the container, run: 
 ```bash
