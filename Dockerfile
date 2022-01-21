@@ -49,3 +49,4 @@ ADD pepper_main.launch /pepper.launch
 
 RUN echo 'source /ros_entrypoint.sh' >>  /root/.bashrc
 RUN echo 'source /catkin_ws/devel/setup.bash' >> /root/.bashrc
+RUN echo 'set +e' >> /root/.bashrc
