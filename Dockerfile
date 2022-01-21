@@ -7,6 +7,7 @@ MAINTAINER Finn Rietz <finn.rietz@uni-hamburg.de>
 RUN apt-get update
 RUN apt-get install -y \
 	vim \
+	tmux \
 	wget \
 	xz-utils \
 	module-init-tools \
