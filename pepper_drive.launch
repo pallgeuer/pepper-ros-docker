@@ -1,0 +1,12 @@
+<launch>
+	<arg name="ip" default="192.168.104.144" />
+	<arg name="namespace" default="pepper_robot" />
+
+	<include file="$(find naoqi_driver_py)/launch/naoqi_driver.launch">
+		<arg name="nao_ip" value="$(arg ip)" />
+	</include>
+
+	<include file="$(find naoqi_pose)/launch/pose_manager.launch" ns="$(arg namespace)/pose" >
+		<arg name="nao_ip" value="$(arg ip)" />
+	</include>
+</launch>
