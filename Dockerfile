@@ -44,9 +44,7 @@ ADD ira_laser_merger_pepper_params.launch /catkin_ws/src/ira_laser_tools/launch
 RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash && cd /catkin_ws && catkin_make'
 
 # add launch files
-ADD pepper_main.launch /pepper.launch
-ADD pepper_camera.launch /pepper_camera.launch
-ADD pepper_drive.launch /pepper_drive.launch
+ADD launch /launch
 
 RUN echo 'source /ros_entrypoint.sh' >>  /root/.bashrc
 RUN echo 'source /catkin_ws/devel/setup.bash' >> /root/.bashrc
