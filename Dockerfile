@@ -31,6 +31,7 @@ RUN wget https://community-static.aldebaran.com/resources/2.5.10/Python%20SDK/py
 RUN tar -xf pynaoqi-python2.7-2.5.7.1-linux64.tar.gz
 RUN rm pynaoqi-python2.7-2.5.7.1-linux64.tar.gz
 RUN echo 'export PYTHONPATH=$PYTHONPATH:/pynaoqi-python2.7-2.5.7.1-linux64/lib/python2.7/site-packages/' >> /ros_entrypoint.sh
+RUN echo 'set +e' >> /ros_entrypoint.sh
 
 # get ira laser merge for pepper's three individual laser
 RUN mkdir -p /catkin_ws/src
@@ -49,4 +50,3 @@ ADD pepper_drive.launch /pepper_drive.launch
 
 RUN echo 'source /ros_entrypoint.sh' >>  /root/.bashrc
 RUN echo 'source /catkin_ws/devel/setup.bash' >> /root/.bashrc
-RUN echo 'set +e' >> /root/.bashrc
