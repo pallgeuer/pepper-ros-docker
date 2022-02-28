@@ -1,0 +1,23 @@
+Commands
+========
+
+# Build the Pepper ROS docker image
+cd ~/Code/Pepper/pepper-ros-docker
+docker build . -t minimal-pepper-ros-driver
+# CHECK: docker image ls
+# UNDO:  docker image rm minimal-pepper-ros-driver
+
+# Run the Pepper ROS docker image
+docker run -it --network host minimal-pepper-ros-driver:latest
+# CHECK:    docker ps -a
+# RESTART:  docker start NAME
+# NEW BASH: docker exec -it NAME bash -i
+# UNDO:     docker stop NAME
+# UNDO:     docker rm NAME
+
+# Launch complete Pepper ROS interface
+# HOST PC: roscore
+# DOCKER:  export ROS_MASTER_URI=http://wtmpc611:11311
+# DOCKER:  roslaunch /launch/pepper_main.launch ip:=192.168.104.115
+# HOST PC: rostopic list
+# HOST PC: rqt
