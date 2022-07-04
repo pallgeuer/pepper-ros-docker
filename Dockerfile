@@ -26,6 +26,9 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV DEBIAN_FRONTEND teletype
 RUN yes | apt-get install ros-kinetic-pepper-meshes
 
+# custom python packages
+RUN apt-get install -y python-scipy
+
 # get pepper naoqi python api (not required, but nice to have if one wants to quickly do API things in the container)
 RUN wget https://community-static.aldebaran.com/resources/2.5.10/Python%20SDK/pynaoqi-python2.7-2.5.7.1-linux64.tar.gz
 RUN tar -xf pynaoqi-python2.7-2.5.7.1-linux64.tar.gz
