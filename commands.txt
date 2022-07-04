@@ -9,7 +9,7 @@ docker build . -t minimal-pepper-ros-driver
 
 # Run the Pepper ROS docker image
 docker run -it --network host minimal-pepper-ros-driver:latest
-# MOUNT VOLUME: For example, add '-v ~/Code/Pepper/PepperDemo:/PepperDemo'
+# MOUNT VOLUME: For example: docker run -it --network host -v ~/Code/Pepper/PepperDemo:/PepperDemo minimal-pepper-ros-driver:latest
 # CHECK:    docker ps -a
 # RESTART:  docker start NAME
 # NEW BASH: docker exec -it NAME bash -i
