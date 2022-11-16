@@ -1,6 +1,6 @@
 <launch>
 
-        <arg name="ip" default="134.100.10.173" />
+	<arg name="ip" default="134.100.10.173" />
 	<arg name="port" default="9559" />
 	<arg name="namespace" default="pepper" />
 
@@ -14,7 +14,6 @@
 		<arg name="resolution" value="2" />
 		<arg name="color_space" value="11" />
 		<arg name="frame_rate" value="30" />
-		<arg name="use_ros_time" value="False" />
 	</include>
 
 </launch>
