@@ -1,19 +1,32 @@
 <launch>
 
-	<arg name="ip" default="134.100.10.173" />
-	<arg name="port" default="9559" />
 	<arg name="namespace" default="pepper" />
+	<arg name="ip"        default="134.100.10.173" />
+	<arg name="port"      default="9559" />
+	<arg name="rate_hz"   default="45.0" />
 
-	<include file="$(find naoqi_driver_py)/launch/naoqi_driver.launch">
-		<arg name="nao_ip" value="$(arg ip)" />
+	<include file="$(find naoqi_driver_py)/launch/naoqi_driver.launch" ns="$(arg namespace)">
+		<arg name="nao_ip"   value="$(arg ip)" />
+		<arg name="nao_port" value="$(arg port)" />
 	</include>
 
-	<include file="$(find pepper_sensors_py)/launch/camera.launch" ns="$(arg namespace)/camera/front" >
-		<arg name="nao_ip" value="$(arg ip)" />
-		<arg name="source" value="0" />
-		<arg name="resolution" value="2" />
+	<include file="$(find naoqi_pose)/launch/pose_manager.launch" ns="$(arg namespace)/pose" >
+		<arg name="nao_ip"   value="$(arg ip)" />
+		<arg name="nao_port" value="$(arg port)" />
+	</include>
+
+	<node name="pepper_api_interface" pkg="pepper_extra" type="pepper_api_interface.py" output="screen" ns="$(arg namespace)">
+		<param name="pip"     type="string" value="$(arg ip)" />
+		<param name="pport"   type="int"    value="$(arg port)" />
+		<param name="rate_hz" type="double" value="$(arg rate_hz)" />
+	</node>
+
+	<include file="$(find pepper_sensors_py)/launch/camera.launch" ns="$(arg namespace)/camera/front">
+		<arg name="nao_ip"      value="$(arg ip)" />
+		<arg name="source"      value="0" />
+		<arg name="resolution"  value="2" />
 		<arg name="color_space" value="13" />
-		<arg name="frame_rate" value="30" />
+		<arg name="frame_rate"  value="30" />
 	</include>
 
 </launch>

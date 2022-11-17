@@ -10,15 +10,35 @@ docker build . -t minimal-pepper-ros-driver
 # Run the Pepper ROS docker image
 docker run -it --network host minimal-pepper-ros-driver:latest
 # MOUNT VOLUME: For example: docker run -it --network host -v ~/Code/Pepper/PepperDemo:/PepperDemo minimal-pepper-ros-driver:latest
-# CHECK:    docker ps -a
-# RESTART:  docker start NAME
-# NEW BASH: docker exec -it NAME bash -i
-# UNDO:     docker stop NAME
-# UNDO:     docker rm NAME
+# CHECK:     docker ps -a
+# RESTART:   docker start NAME
+# NEW BASH:  docker exec -it NAME bash -i
+# COPY FILE: docker cp ~/Code/Pepper/pepper-ros-docker/pepper_extra/. NAME:/catkin_ws/src/pepper_extra/
+# RECOMPILE: docker exec -it NAME /bin/bash -c 'source /opt/ros/kinetic/setup.bash && cd /catkin_ws && catkin_make'
+# UNDO:      docker stop NAME
+# UNDO:      docker rm NAME
 
 # Launch complete Pepper ROS interface
 # HOST PC: roscore
 # DOCKER:  export ROS_MASTER_URI=http://wtmpc611:11311
-# DOCKER:  roslaunch /launch/pepper_main.launch ip:=192.168.104.115
+# DOCKER:  roslaunch pepper_extra pepper_main.launch ip:=192.168.104.115
 # HOST PC: rostopic list
 # HOST PC: rqt
+
+# Launch commands
+# HOST PC: roscore
+# DOCKER:  export ROS_MASTER_URI=http://wtmpc611:11311
+# DOCKER:  rosrun pepper_extra pepper_api_interface.py --pip 134.100.10.173
+# DOCKER:  roslaunch pepper_extra pepper_wrapyfi.launch ip:=134.100.10.173
+
+# Control the Pepper robot via ROS (needs node /pepper/pose/pose_manager)
+rosservice call /pepper/pose/rest
+rosservice call /pepper/pose/wakeup
+rosservice call /pepper/pose/life/enable   # Autonomous life where the robot also moves and looks around
+rosservice call /pepper/pose/life/disable  # Also makes robot rest
+
+# Control the Pepper robot manually via GUI
+cd ~/Code/Pepper/WoZ4U
+conda activate naoqi
+python server.py  # <-- Ctrl+C to stop
+xdg-open http://0.0.0.0:5000
