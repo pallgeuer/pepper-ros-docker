@@ -19,7 +19,7 @@ RUN yes | apt-get install ros-kinetic-pepper-meshes
 RUN apt-get install -y python-scipy
 
 # Get Pepper NAOqi python API (not strictly speaking required, but nice to have if one wants to quickly do API things in the container)
-RUN wget https://community-static.aldebaran.com/resources/2.5.10/Python%20SDK/pynaoqi-python2.7-2.5.7.1-linux64.tar.gz
+RUN wget --no-check-certificate https://community-static.aldebaran.com/resources/2.5.10/Python%20SDK/pynaoqi-python2.7-2.5.7.1-linux64.tar.gz
 RUN tar -xf pynaoqi-python2.7-2.5.7.1-linux64.tar.gz
 RUN rm pynaoqi-python2.7-2.5.7.1-linux64.tar.gz
 RUN echo 'export PYTHONPATH=$PYTHONPATH:/pynaoqi-python2.7-2.5.7.1-linux64/lib/python2.7/site-packages/' >> /ros_entrypoint.sh
