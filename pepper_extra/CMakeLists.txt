@@ -60,6 +60,7 @@ add_service_files(
   SpeechSay.srv
   AnimPlay.srv
   SetPosture.srv
+  IdleMode.srv
 )
 
 ## Generate actions in the 'action' folder

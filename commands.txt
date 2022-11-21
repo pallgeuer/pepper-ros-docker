@@ -32,6 +32,8 @@ docker run -it --network host minimal-pepper-ros-driver:latest
 # DOCKER:  roslaunch pepper_extra pepper_wrapyfi.launch ip:=134.100.10.173
 
 # Control the Pepper robot via ROS (needs node /pepper/pose/pose_manager)
+rosservice call /pepper/pose/idle_mode "{idle_enabled: false, breath_enabled: false}"
+rosservice call /pepper/pose/home
 rosservice call /pepper/pose/rest
 rosservice call /pepper/pose/wakeup
 rosservice call /pepper/pose/life/enable   # Autonomous life where the robot also moves and looks around

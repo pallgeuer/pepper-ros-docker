@@ -27,6 +27,7 @@ class PepperAPIInterface(NaoqiNode):
 		self.speech_proxy = self.get_proxy("ALAnimatedSpeech")
 		self.anim_proxy = self.get_proxy("ALAnimationPlayer")
 		self.posture_proxy = self.get_proxy("ALRobotPosture")
+		self.motion_proxy = self.get_proxy("ALMotion")
 
 		self.srv_leds_set_rgb = rospy.Service("leds/set_rgb", pepper_extra.srv.LEDsSetRGB, self.handle_leds_set_rgb)
 		self.srv_speech_say = rospy.Service("speech/say", pepper_extra.srv.SpeechSay, self.handle_speech_say)
@@ -34,6 +35,7 @@ class PepperAPIInterface(NaoqiNode):
 		self.srv_anim_play = rospy.Service("anim/play", pepper_extra.srv.AnimPlay, self.handle_anim_play)
 		self.srv_pose_set_posture = rospy.Service("pose/set_posture", pepper_extra.srv.SetPosture, self.handle_pose_set_posture)
 		self.srv_pose_home = rospy.Service("pose/home", std_srvs.srv.Empty, self.handle_pose_home)
+		self.srv_idle_mode = rospy.Service("pose/idle_mode", pepper_extra.srv.IdleMode, self.handle_pose_idle_mode)
 
 		self.action_queue = Queue.Queue()
 
@@ -123,6 +125,17 @@ class PepperAPIInterface(NaoqiNode):
 		try:
 			self.action_queue.put_nowait((self.perform_pose_set_posture, 'Stand', 0.3))
 			return std_srvs.srv.EmptyResponse()
+		except RuntimeError as e:
+			rospy.logerr("Exception caught:\n%s", e)
+			return None
+
+	def handle_pose_idle_mode(self, msg):
+		try:
+			self.motion_proxy.setIdlePostureEnabled('Body', msg.idle_enabled)
+			self.motion_proxy.setIdlePostureEnabled('Arms', msg.idle_enabled)
+			self.motion_proxy.setBreathEnabled('Body', msg.breath_enabled)
+			self.motion_proxy.setBreathEnabled('Arms', msg.breath_enabled)
+			return pepper_extra.srv.IdleModeResponse()
 		except RuntimeError as e:
 			rospy.logerr("Exception caught:\n%s", e)
 			return None
