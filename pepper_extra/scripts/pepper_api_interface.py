@@ -118,6 +118,7 @@ class PepperAPIInterface(NaoqiNode):
 	def perform_pose_set_posture(self, posture, speed):
 		self.posture_proxy.goToPosture(posture, speed)
 
+	# noinspection PyUnusedLocal
 	def handle_pose_home(self, msg):
 		try:
 			self.action_queue.put_nowait((self.perform_pose_set_posture, 'Stand', 0.3))
