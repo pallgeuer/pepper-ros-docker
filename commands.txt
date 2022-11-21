@@ -23,7 +23,7 @@ docker run -it --network host minimal-pepper-ros-driver:latest
 # DOCKER:  export ROS_MASTER_URI=http://wtmpc611:11311
 # DOCKER:  roslaunch pepper_extra pepper_main.launch ip:=192.168.104.115
 # HOST PC: rostopic list
-# HOST PC: rqt
+# HOST PC: rqt  (open RViz configuration resources/pepper_config.rviz)
 
 # Launch commands
 # HOST PC: roscore
