@@ -42,3 +42,7 @@ cd ~/Code/Pepper/WoZ4U
 conda activate naoqi
 python server.py  # <-- Ctrl+C to stop
 xdg-open http://0.0.0.0:5000
+
+# Compile Pepper workspace on host PC
+cd ~/Code/Pepper/pepper_ros_ws && catkin build
+source ~/Code/Pepper/pepper_ros_ws/devel/setup.bash

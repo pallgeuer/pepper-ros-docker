@@ -58,6 +58,8 @@ add_service_files(
   FILES
   LEDsSetRGB.srv
   SpeechSay.srv
+  AnimPlay.srv
+  SetPosture.srv
 )
 
 ## Generate actions in the 'action' folder
