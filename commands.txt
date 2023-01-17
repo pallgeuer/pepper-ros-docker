@@ -28,7 +28,7 @@ docker run -it --network host minimal-pepper-ros-driver:latest
 # Launch commands
 # HOST PC: roscore
 # DOCKER:  export ROS_MASTER_URI=http://wtmpc611:11311
-# DOCKER:  rosrun pepper_extra pepper_api_interface.py --pip 134.100.10.173
+# DOCKER:  rosrun pepper_extra pepper_api_interface.py --pip 134.100.10.173 __ns:=pepper
 # DOCKER:  roslaunch pepper_extra pepper_wrapyfi.launch ip:=134.100.10.173
 
 # Control the Pepper robot via ROS (needs node /pepper/pose/pose_manager)
