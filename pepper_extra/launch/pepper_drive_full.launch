@@ -1,0 +1,29 @@
+<launch>
+	<arg name="ip" default="192.168.104.144" />
+	<arg name="namespace" default="pepper_robot" />
+	<arg name="port"      default="9559" />
+	<arg name="rate_hz"   default="45.0" />
+	
+	<param name="pepper_description" textfile="$(find pepper_extra)/resources/pepper_description.urdf"/>
+	
+
+	<include file="$(find naoqi_driver_py)/launch/naoqi_driver.launch">
+		<arg name="nao_ip" value="$(arg ip)" />
+	</include>
+
+	<include file="$(find naoqi_pose)/launch/pose_manager.launch" ns="$(arg namespace)/pose" >
+		<arg name="nao_ip" value="$(arg ip)" />
+	</include>
+	
+	<node name="pepper_api_interface" pkg="pepper_extra" type="pepper_api_interface.py" output="screen" ns="$(arg namespace)">
+		<param name="pip"     type="string" value="$(arg ip)" />
+		<param name="pport"   type="int"    value="$(arg port)" />
+		<param name="rate_hz" type="double" value="$(arg rate_hz)" />
+	</node>
+	
+	<node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_pub" >
+      		<remap from="robot_description" to="pepper_description" />
+    	</node>
+
+	
+</launch>
