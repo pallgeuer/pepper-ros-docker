@@ -29,4 +29,4 @@ Assuming you have a roscore running on your main machine prior to launching anyt
 ```bash
 export ROS_MASTER_URI=<ROSCORE-URI>
 ```
-Replace `<ROSCORE-URI>` with whatever the value is for your roscore, e.g. `http://wtmpc611:11311`. On your main machine, you can now start tools like RViz to inspect topic data or [rqt_robot_steering](http://wiki.ros.org/rqt_robot_steering) to drive Pepper around. For RViz, you can load the `resources/pepper_config.rviz` configuration to see laser, camera and depth data.
+Replace `<ROSCORE-URI>` with whatever the value is for your roscore, e.g. `http://wtmpc810:11311`. On your main machine, you can now start tools like RViz to inspect topic data or [rqt_robot_steering](http://wiki.ros.org/rqt_robot_steering) to drive Pepper around. For RViz, you can load the `resources/pepper_config.rviz` configuration to see laser, camera and depth data.
