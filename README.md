@@ -4,7 +4,7 @@ This repository provides a Dockerfile that builds a relatively minimal (headless
 ## Installation
 Simply build the Docker image locally:
 ```bash
-git clone https://github.com/frietz58/pepper-ros-docker.git
+git clone https://github.com/pallgeuer/pepper-ros-docker.git
 cd pepper-ros-docker
 docker build . -t minimal-pepper-ros-driver
 ```
